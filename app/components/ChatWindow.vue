@@ -1,9 +1,20 @@
 <script lang="ts" setup>
-const { chat, messages, sendMessage } = useChat();
+import type { ChatMessage, Chat } from '@/types';
+
+const props = defineProps<{
+  messages: ChatMessage[];
+  chat: Chat;
+}>();
+
+const emit = defineEmits(['send-message']);
+
+const { showScrollButton, scrollToBottom, pinToBottom } = useChatScroll();
 
 const handleSendMessage = (message: string) => {
-  sendMessage(message);
+  emit('send-message', message);
 };
+
+watch(() => props.messages, pinToBottom, { deep: true });
 </script>
 
 <template>
@@ -37,6 +48,16 @@ const handleSendMessage = (message: string) => {
           </div>
         </div>
         <div class="message-form-container">
+          <div class="scroll-to-bottom-button-container">
+            <UButton
+              v-if="showScrollButton"
+              color="neutral"
+              variant="outline"
+              icon="i-heroicons-arrow-down"
+              class="shadow-sm rounded-full cursor-pointer"
+              @click="() => scrollToBottom()"
+            />
+          </div>
           <ChatInput @send-message="handleSendMessage" />
         </div>
       </template>

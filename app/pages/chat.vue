@@ -1,7 +1,13 @@
-<template>
-  <ChatWindow />
-</template>
+<script lang="ts" setup>
+const { chat, messages, sendMessage } = useChat();
 
-<script lang="ts" setup></script>
+useHead({
+  title: chat.value.title,
+});
+</script>
+
+<template>
+  <ChatWindow :chat :messages @send-message="sendMessage" />
+</template>
 
 <style></style>

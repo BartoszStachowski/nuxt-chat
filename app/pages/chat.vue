@@ -23,7 +23,6 @@ useHead({
 
 <template>
   <div>
-    <h1>TEST</h1>
     <ChatWindow :typing :chat :messages @send-message="handleSendMessage" />
   </div>
 </template>

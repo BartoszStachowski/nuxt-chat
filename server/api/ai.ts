@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
 
   const id = messages.length.toString();
 
-  const openaiApiKey = useRuntimeConfig().openiApiKey;
+  const openaiApiKey = useRuntimeConfig().openaiApiKey;
   const openaiModel = createOpenAiModel(openaiApiKey);
 
   const response = await generateChatResponse(openaiModel, messages);

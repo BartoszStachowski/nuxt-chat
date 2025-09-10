@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui', '@nuxt/eslint', '@nuxtjs/mdc'],
 
   runtimeConfig: {
-    openiApiKey: process.env.NUXT_OPENAI_API_KEY,
+    openaiApiKey: process.env.NUXT_OPENAI_API_KEY,
   },
 
   vite: {

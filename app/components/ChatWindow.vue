@@ -44,7 +44,7 @@ watch(() => props.messages, pinToBottom, { deep: true });
             }"
           >
             <div class="message-content">
-              {{ message.content }}
+              <MarkdownRenderer :content="message.content" />
             </div>
           </div>
 
@@ -196,5 +196,11 @@ watch(() => props.messages, pinToBottom, { deep: true });
 
 .message-input::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
+}
+
+.typing-indicator {
+  display: inline-block;
+  animation: pulse 1s infinite;
+  margin-left: 0.25rem;
 }
 </style>

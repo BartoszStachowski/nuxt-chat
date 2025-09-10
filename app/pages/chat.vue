@@ -22,7 +22,10 @@ useHead({
 </script>
 
 <template>
-  <ChatWindow :typing :chat :messages @send-message="handleSendMessage" />
+  <div>
+    <h1>TEST</h1>
+    <ChatWindow :typing :chat :messages @send-message="handleSendMessage" />
+  </div>
 </template>
 
 <style></style>

@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   },
   css: ['@/assets/css/main.css'],
 
-  modules: ['@nuxt/ui', '@nuxt/eslint'],
+  modules: ['@nuxt/ui', '@nuxt/eslint', '@nuxtjs/mdc'],
 
   runtimeConfig: {
     openiApiKey: process.env.NUXT_OPENAI_API_KEY,
@@ -16,6 +16,13 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       include: ['debug'],
+    },
+  },
+
+  mdc: {
+    highlight: {
+      theme: 'material-theme-palenight',
+      langs: ['html', 'markdown', 'vue', 'typescript', 'javascript'],
     },
   },
 });

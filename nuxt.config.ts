@@ -8,4 +8,14 @@ export default defineNuxtConfig({
   css: ['@/assets/css/main.css'],
 
   modules: ['@nuxt/ui', '@nuxt/eslint'],
+
+  runtimeConfig: {
+    openiApiKey: process.env.NUXT_OPENAI_API_KEY,
+  },
+
+  vite: {
+    optimizeDeps: {
+      include: ['debug'],
+    },
+  },
 });

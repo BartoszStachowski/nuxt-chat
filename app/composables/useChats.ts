@@ -20,6 +20,8 @@ export const useChats = () => {
     };
 
     chats.value.push(chat);
+
+    return chat;
   };
 
   const chatsInProject = (projectId: string) => {

@@ -12,7 +12,7 @@ export const useChats = () => {
     const id = (chats.value.length + 1).toString();
     const chat = {
       id,
-      title: 'New Chat',
+      title: `Chat ${id}`,
       messages: [],
       projectId: options.projectId,
       createdAt: new Date(),
@@ -24,6 +24,13 @@ export const useChats = () => {
     return chat;
   };
 
+  const createChatAndNavigate = async (
+    options: { projectId?: string } = {}
+  ) => {
+    const chat = createChat(options);
+    await navigateTo(`/chats/${chat.id}`);
+  };
+
   const chatsInProject = (projectId: string) => {
     return chats.value.filter((chat) => chat.projectId === projectId);
   };
@@ -31,6 +38,7 @@ export const useChats = () => {
   return {
     chats,
     createChat,
+    createChatAndNavigate,
     chatsInProject,
   };
 };

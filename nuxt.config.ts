@@ -24,4 +24,8 @@ export default defineNuxtConfig({
       langs: ['html', 'markdown', 'vue', 'typescript', 'javascript'],
     },
   },
+
+  // ui: {
+  //   colorMode: false,
+  // },
 });

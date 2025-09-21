@@ -1,7 +1,17 @@
+<script lang="ts" setup>
+const isSidebarOpen = ref(true);
+</script>
+
 <template>
   <div class="layout-container">
-    <AppHeader />
-    <main class="main-content">
+    <AppHeader @toggle-sidebar="isSidebarOpen = !isSidebarOpen" />
+    <AppSidebar :is-open="isSidebarOpen" />
+    <main
+      class="transition-all duration-300 ease-in-out main-content"
+      :class="{
+        'ml-64': isSidebarOpen,
+      }"
+    >
       <slot />
     </main>
   </div>

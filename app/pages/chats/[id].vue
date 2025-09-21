@@ -1,8 +1,19 @@
 <script lang="ts" setup>
+import type { Chat } from '@/types';
 const route = useRoute();
-const { chat, messages, sendMessage } = useChat(route.params.id as string);
+const {
+  chat: chatFromChats,
+  messages,
+  sendMessage,
+} = useChat(route.params.id as string);
+
+if (!chatFromChats.value) {
+  await navigateTo('/', { replace: true });
+}
 
 const typing = ref(false);
+
+const chat = computed(() => chatFromChats.value as Chat);
 
 const handleSendMessage = async (message: string) => {
   typing.value = true;
@@ -23,9 +34,7 @@ useHead({
 </script>
 
 <template>
-  <div>
-    <ChatWindow :typing :chat :messages @send-message="handleSendMessage" />
-  </div>
+  <ChatWindow :typing :chat :messages @send-message="handleSendMessage" />
 </template>
 
 <style></style>

@@ -7,7 +7,26 @@ defineProps<{
 }>();
 
 const route = useRoute();
-const { chats } = useChats();
+const { chats, createChatAndNavigate } = useChats();
+
+const chatsWithoutProject = computed(() => {
+  return chats.value.filter((c) => c.projectId === undefined);
+});
+
+const filterChats = (startDays: number, endDays?: number) => {
+  return computed(() => {
+    return filterChatsByDateRange(
+      chatsWithoutProject.value,
+      startDays,
+      endDays
+    ).map(formatChatItem);
+  });
+};
+
+const todayChats = filterChats(-1, 1);
+const lastWeekChats = filterChats(1, 7);
+const lastMonthChats = filterChats(7, 30);
+const olderChats = filterChats(30);
 
 const formatChatItem = (chat: Chat): NavigationMenuItem => {
   return {
@@ -17,9 +36,9 @@ const formatChatItem = (chat: Chat): NavigationMenuItem => {
   };
 };
 
-const formattedChats = computed(() => {
-  return chats.value.map(formatChatItem);
-});
+const handleCreateChat = async () => {
+  await createChatAndNavigate();
+};
 </script>
 
 <template>
@@ -27,18 +46,72 @@ const formattedChats = computed(() => {
     class="fixed top-16 left-0 bottom-0 w-64 transition-transform duration-300 z-40 bg-(--ui-bg-muted) border-r-(--ui-border) border-r"
     :class="{ '-translate-x-full': !isOpen }"
   >
-    <div class="p-4 overflow-y-auto">
-      <div class="mb-4">
+    <div v-if="chatsWithoutProject.length > 0" class="p-4 overflow-y-auto">
+      <div v-if="todayChats.length > 0" class="mb-4">
         <div class="flex justify-between items-center mb-2">
-          <h2 class="text-sm font-semibold text-(--ui-text-muted)">Chats</h2>
+          <h2 class="text-sm font-semibold text-(--ui-text-muted)">Today</h2>
         </div>
         <UNavigationMenu
           orientation="vertical"
           class="mb-4 w-full"
           default-open
-          :items="formattedChats"
+          :items="todayChats"
         />
       </div>
+      <div v-if="lastWeekChats.length > 0" class="mb-4">
+        <div class="flex justify-between items-center mb-2">
+          <h2 class="text-sm font-semibold text-(--ui-text-muted)">
+            Last 7 Days
+          </h2>
+        </div>
+        <UNavigationMenu
+          orientation="vertical"
+          class="mb-4 w-full"
+          default-open
+          :items="lastWeekChats"
+        />
+      </div>
+      <div v-if="lastMonthChats.length > 0" class="mb-4">
+        <div class="flex justify-between items-center mb-2">
+          <h2 class="text-sm font-semibold text-(--ui-text-muted)">
+            Last 30 Days
+          </h2>
+        </div>
+        <UNavigationMenu
+          orientation="vertical"
+          class="mb-4 w-full"
+          default-open
+          :items="lastMonthChats"
+        />
+      </div>
+      <div v-if="olderChats.length > 0" class="mb-4">
+        <div class="flex justify-between items-center mb-2">
+          <h2 class="text-sm font-semibold text-(--ui-text-muted)">Older</h2>
+        </div>
+        <UNavigationMenu
+          orientation="vertical"
+          class="mb-4 w-full"
+          default-open
+          :items="olderChats"
+        />
+      </div>
+    </div>
+    <div v-else class="p-4 overflow-y-auto">
+      <UAlert
+        title="No Chats"
+        description="Create a new chat to get started."
+        variant="subtle"
+        class="mt-2"
+      />
+      <UButton
+        size="sm"
+        variant="soft"
+        icon="i-heroicons-plus-small"
+        class="mt-2 w-full"
+        @click="handleCreateChat"
+      >
+        New Chat
+      </UButton>
     </div>
   </aside>
 </template>

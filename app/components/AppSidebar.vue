@@ -101,7 +101,7 @@ const handleCreateChat = async () => {
   >
     <div
       v-if="projectItems.length > 0"
-      class="mb-4 border-b border-(--ui-border) overflow-auto )"
+      class="mb-4 overflow-auto p-4 border-b border-(--ui-border)"
     >
       <div class="flex justify-between items-center mb-2">
         <h2 class="text-sm font-semibold text-(--ui-text-muted)">Projects</h2>

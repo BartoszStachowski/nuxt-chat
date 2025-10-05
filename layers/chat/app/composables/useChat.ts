@@ -1,4 +1,4 @@
-import type { ChatMessage } from '@/types';
+import type { ChatMessage } from '@@/layers/chat/app/types';
 import { useChats } from './useChats';
 
 export const useChat = (chatId: string) => {

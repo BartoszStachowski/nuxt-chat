@@ -1,4 +1,4 @@
-import type { Project } from '@/types';
+import type { Project } from '@@/layers/chat/app/types';
 import { useProjects } from './useProjects';
 
 export const useProject = (projectId: string) => {

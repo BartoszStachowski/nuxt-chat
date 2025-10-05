@@ -1,7 +1,7 @@
 import {
   createOpenAiModel,
   generateChatResponse,
-} from '@@/server/services/ai-service';
+} from '@@/layers/chat/server/services/ai-service';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);

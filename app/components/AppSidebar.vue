@@ -109,11 +109,12 @@ const handleCreateChat = async () => {
       <UNavigationMenu
         orientation="vertical"
         class="mb-4 w-full"
-        default-open
         :items="projectItems"
+        default-open
       />
       <UButton
         size="sm"
+        color="neutral"
         variant="soft"
         icon="i-heroicons-plus-small"
         class="mt-2 w-full"
@@ -122,7 +123,6 @@ const handleCreateChat = async () => {
         New Project
       </UButton>
     </div>
-
     <div v-if="chatsWithoutProject.length > 0" class="p-4 overflow-y-auto">
       <div v-if="todayChats.length > 0" class="mb-4">
         <div class="flex justify-between items-center mb-2">
@@ -131,8 +131,8 @@ const handleCreateChat = async () => {
         <UNavigationMenu
           orientation="vertical"
           class="mb-4 w-full"
-          default-open
           :items="todayChats"
+          default-open
         />
       </div>
       <div v-if="lastWeekChats.length > 0" class="mb-4">
@@ -144,8 +144,8 @@ const handleCreateChat = async () => {
         <UNavigationMenu
           orientation="vertical"
           class="mb-4 w-full"
-          default-open
           :items="lastWeekChats"
+          default-open
         />
       </div>
       <div v-if="lastMonthChats.length > 0" class="mb-4">
@@ -157,8 +157,8 @@ const handleCreateChat = async () => {
         <UNavigationMenu
           orientation="vertical"
           class="mb-4 w-full"
-          default-open
           :items="lastMonthChats"
+          default-open
         />
       </div>
       <div v-if="olderChats.length > 0" class="mb-4">
@@ -168,8 +168,8 @@ const handleCreateChat = async () => {
         <UNavigationMenu
           orientation="vertical"
           class="mb-4 w-full"
-          default-open
           :items="olderChats"
+          default-open
         />
       </div>
     </div>
@@ -177,11 +177,13 @@ const handleCreateChat = async () => {
       <UAlert
         title="No Chats"
         description="Create a new chat to get started."
-        variant="subtle"
+        color="neutral"
+        variant="soft"
         class="mt-2"
       />
       <UButton
         size="sm"
+        color="neutral"
         variant="soft"
         icon="i-heroicons-plus-small"
         class="mt-2 w-full"

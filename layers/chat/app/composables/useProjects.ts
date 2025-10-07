@@ -1,6 +1,3 @@
-import type { Project } from '@@/layers/chat/app/types';
-import { MOCK_PROJECT } from './mockData';
-
 export const useProjects = () => {
   const projects = useState<Project[]>('projects', () => [MOCK_PROJECT]);
 
@@ -9,6 +6,8 @@ export const useProjects = () => {
     const project = {
       id,
       name: 'New Project',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
     projects.value.push(project);

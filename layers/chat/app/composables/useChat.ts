@@ -1,6 +1,3 @@
-import type { ChatMessage } from '@@/layers/chat/app/types';
-import { useChats } from './useChats';
-
 export const useChat = (chatId: string) => {
   const { chats } = useChats();
   const chat = computed(() => chats.value.find((chat) => chat.id === chatId));
@@ -14,6 +11,8 @@ export const useChat = (chatId: string) => {
       id,
       role,
       content: message,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
   };
 

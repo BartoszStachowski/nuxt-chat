@@ -1,5 +1,3 @@
-import { useProjects } from './useProjects';
-
 export const useProject = (projectId: string) => {
   const { projects } = useProjects();
 

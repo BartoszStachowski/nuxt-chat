@@ -1,0 +1,50 @@
+import { v4 as uuidv4 } from 'uuid';
+
+const projects: Project[] = [MOCK_PROJECT];
+
+export const getAllProjects = (): Project[] =>
+  [...projects].sort((a, b) => a.name.localeCompare(b.name));
+
+export const getProjectById = (id: string): Project | null =>
+  projects.find((p) => p.id === id) || null;
+
+export const createProject = async (data: {
+  name: string;
+}): Promise<Project> => {
+  const now = new Date();
+  const newProject: Project = {
+    id: uuidv4(),
+    name: data.name,
+    createdAt: now,
+    updatedAt: now,
+  };
+  projects.push(newProject);
+  return newProject;
+};
+
+export const updateProject = async (
+  id: string,
+  data: { name: string }
+): Promise<Project | null> => {
+  const projectIndex = projects.findIndex((p) => p.id === id);
+  if (projectIndex === -1) return null;
+  const project = projects[projectIndex];
+  if (!project) return null;
+  const updatedProject: Project = {
+    id: project.id,
+    name: data.name,
+    createdAt: project.createdAt,
+    updatedAt: new Date(),
+  };
+  projects[projectIndex] = updatedProject;
+  return updatedProject;
+};
+
+export const deleteProject = async (id: string): Promise<boolean> => {
+  const index = projects.findIndex((project) => project.id === id);
+  if (index !== -1) {
+    projects.splice(index, 1);
+    return true;
+  }
+  return false;
+};

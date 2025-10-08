@@ -12,7 +12,7 @@ export const createOpenAiModel = (apiKey: string) => {
 
 export async function generateChatResponse(
   model: LanguageModel,
-  messages: ModelMessage
+  messages: ModelMessage[]
 ) {
   if (!Array.isArray(messages) || messages.length === 0) {
     throw new Error('Invalid messages format');

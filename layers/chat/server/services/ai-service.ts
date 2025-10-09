@@ -10,10 +10,10 @@ export const createOpenAiModel = (apiKey: string) => {
   return openai('gpt-5-nano');
 };
 
-export async function generateChatResponse(
+export const generateChatResponse = async (
   model: LanguageModel,
   messages: ModelMessage[]
-) {
+) => {
   if (!Array.isArray(messages) || messages.length === 0) {
     throw new Error('Invalid messages format');
   }
@@ -24,4 +24,24 @@ export async function generateChatResponse(
   });
 
   return response.text.trim();
-}
+};
+
+export const generateChatTitle = async (
+  model: LanguageModel,
+  firstMessage: string
+): Promise<string> => {
+  const response = await generateText({
+    model,
+    messages: [
+      {
+        role: 'system',
+        content: 'Summarize the message in 3 or less short worlds.',
+      },
+      {
+        role: 'user',
+        content: firstMessage,
+      },
+    ],
+  });
+  return response.text.trim();
+};

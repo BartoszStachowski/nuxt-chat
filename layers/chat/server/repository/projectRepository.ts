@@ -3,7 +3,9 @@ import { v4 as uuidv4 } from 'uuid';
 const projects: Project[] = [MOCK_PROJECT];
 
 export const getAllProjects = (): Project[] => {
-  return [...projects].sort((a, b) => a.name.localeCompare(b.name));
+  return [...projects].sort(
+    (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+  );
 };
 
 export const getProjectById = (id: string): Project | null =>
@@ -15,7 +17,7 @@ export const createProject = async (data: {
   const now = new Date();
   const newProject: Project = {
     id: uuidv4(),
-    name: data.name,
+    name: data.name || 'New Project',
     createdAt: now,
     updatedAt: now,
   };

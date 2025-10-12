@@ -33,7 +33,7 @@ export const useChats = () => {
   const createChatAndNavigate = async (
     options: { projectId?: string } = {}
   ) => {
-    const chat = createChat(options);
+    const chat = await createChat(options);
     if (chat.projectId) {
       await navigateTo(`/projects/${chat.projectId}/chats/${chat.id}`);
     } else {

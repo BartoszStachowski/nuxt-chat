@@ -1,5 +1,15 @@
 export const useChats = () => {
-  const chats = useState<Chat[]>('chats', () => [MOCK_CHAT]);
+  const chats = useState<Chat[]>('chats', () => []);
+  const { data, execute, status } = useFetch<Chat[]>('/api/chats', {
+    immediate: false,
+    default: () => [],
+  });
+
+  const fetchChats = async () => {
+    if (status.value !== 'idle') return;
+    await execute();
+    chats.value = data.value;
+  };
 
   const createChat = (
     options: {
@@ -41,5 +51,6 @@ export const useChats = () => {
     createChat,
     createChatAndNavigate,
     chatsInProject,
+    fetchChats,
   };
 };

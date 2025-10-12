@@ -2,8 +2,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 const projects: Project[] = [MOCK_PROJECT];
 
-export const getAllProjects = (): Project[] =>
-  [...projects].sort((a, b) => a.name.localeCompare(b.name));
+export const getAllProjects = (): Project[] => {
+  return [...projects].sort((a, b) => a.name.localeCompare(b.name));
+};
 
 export const getProjectById = (id: string): Project | null =>
   projects.find((p) => p.id === id) || null;
